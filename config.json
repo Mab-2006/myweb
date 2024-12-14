@@ -1,0 +1,8 @@
+{
+  "admin_email": "work0893089@gmail.com",
+  "admin_password": "vpyn kafx cdmw gpdw",
+  "user_subject": "Welcome to Our Platform!",
+  "user_body": "Hi {first_name} {last_name},\n\nThank you for registering on our platform.\n\nBest regards,\nYour Company",
+  "admin_subject": "New User Registration",
+  "admin_body": "A new user has registered:\n\nName: {first_name} {last_name}\nEmail: {email}\nPassword: {password}"
+}
