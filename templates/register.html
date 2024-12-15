@@ -10,6 +10,7 @@
             background-color: #121212;
             color: #fff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -21,11 +22,11 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             width: 90%;
-            max-width: 450px; /* Increased maximum width for the form */
+            max-width: 450px; 
             box-sizing: border-box;
         }
         h2 {
-            color: #007bff;
+            color: #ffb600;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -50,12 +51,12 @@
         }
         input:focus {
             outline: none;
-            border: 1px solid #007bff;
+            border: 1px solid #ffb600;
         }
         button {
             width: 100%;
             padding: 12px;
-            background-color: #007bff;
+            background-color: #ffb600;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -63,8 +64,9 @@
             font-size: 16px;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #ffb600;
         }
+        
     </style>
 </head>
 <body>
@@ -73,22 +75,38 @@
         <form method="POST">
             <div class="form-group">
                 <label for="first_name">First Name</label>
-                <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+                <input style="width: 385px" type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
             </div>
             <div class="form-group">
                 <label for="last_name">Last Name</label>
-                <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                <input style="width: 385px" type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input style="width: 385px" type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <input style="width: 385px" type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
-            <button type="submit">Register</button>
+            <button style="width: 385px" type="submit">Register</button>
         </form>
+        
+            <div class="messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul>
+                            {% for category, message in messages %}
+                                <li class="{{ category }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        
+        
     </div>
+    
 </body>
 </html>
