@@ -11,7 +11,7 @@ COPY . /app/.
 WORKDIR /app
 
 # نصب وابستگی‌ها از فایل requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # اجرای دستور پیش‌فرض برای پروژه
 CMD ["python", "server.py"]
