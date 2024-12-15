@@ -9,7 +9,6 @@ Jinja2==3.1.4
 MarkupSafe==3.0.2
 pycryptodome==3.21.0
 pypiwin32==223
-pywin32==308
 SQLAlchemy==2.0.36
 typing_extensions==4.12.2
 Werkzeug==3.1.3
