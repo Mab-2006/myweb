@@ -6,6 +6,7 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 import subprocess
 
+
 app = Flask(__name__)
 app.secret_key = "secret-key"
 
