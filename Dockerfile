@@ -1,5 +1,5 @@
 # استفاده از یک تصویر پایه پایتون
-FROM python:3.8-slim
+FROM python:3.9-slim
 
 # نصب پکیج‌های مورد نیاز لینوکس (برای مثال، اگر به پکیج‌های خاصی نیاز دارید)
 RUN apt-get update && apt-get install -y libpq-dev
