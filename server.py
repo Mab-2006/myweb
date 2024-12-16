@@ -100,17 +100,13 @@ def login():
             return redirect(url_for('home'))
         else:
             flash("Invalid login credentials", 'error')
-            return redirect(url_for('login'))
+            return redirect(url_for('login.html'))
 
     return render_template('login.html')
 
-def run_python_script():
-    
-    subprocess.run(["python", "home.py"])
 
 @app.route('/home')
 def home():
-    run_python_script()
     return render_template('home.html')
 
 if __name__ == "__main__":
