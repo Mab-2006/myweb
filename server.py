@@ -100,10 +100,9 @@ def login():
             return redirect(url_for('home'))
         else:
             flash("Invalid login credentials", 'error')
-            return redirect(url_for('login.html'))
+            return redirect(url_for('login'))
 
-    return render_template('templates/login.html')
-
+    return render_template('login.html')
 
 @app.route('/home')
 def home():
