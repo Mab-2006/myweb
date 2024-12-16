@@ -93,6 +93,15 @@
         </form>
         <div class="form-footer">
             <p>Don't have an account? <a href="/register">Sign up</a></p>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
         </div>
     </div>
 </body>

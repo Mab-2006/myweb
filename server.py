@@ -102,7 +102,7 @@ def login():
             flash("Invalid login credentials", 'error')
             return redirect(url_for('login.html'))
 
-    return render_template('login.html')
+    return render_template('login')
 
 
 @app.route('/home')
